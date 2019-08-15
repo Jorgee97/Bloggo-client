@@ -49,9 +49,12 @@ export default {
           let currentObj = this;
           this.axios.post('http://localhost:8080/login', {
               username: this.username,
-              password: this.password
+              password: this.password,
+              withCredentials: true,
+              headers: { crossDomain: true, 'Content-Type': 'application/json' }
           })
           .then((response) => {
+              console.log(response)
               if (response.status == 200) {
                   currentObj.output = ' ';
                   this.$router.push({path: '/dashboard'})
