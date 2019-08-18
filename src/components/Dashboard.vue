@@ -2,7 +2,7 @@
   <div class="flex">
     <div class="bg-indigo-700 h-screen w-16 shadow-2xl">
       <img class="h-14 w-14 mb-4 p-2" src="@/assets/images/home.png" alt="Home icon" />
-      <img class="h-14 w-14 mb-4 p-2" src="@/assets/images/contract.png" alt="Create icon" />
+      <img @click="creator()" class="h-14 w-14 mb-4 p-2" src="@/assets/images/contract.png" alt="Create icon" />
       <img class="h-14 w-14 mb-4 p-2" src="@/assets/images/settings.png" alt="Settings icon" />
     </div>
     <div class="h-screen w-full">
@@ -11,6 +11,7 @@
         <div class="w-full border-indigo-400 border-2 h-auto rounded shadow-2xl py-6 px-6 mt-6" v-for="article in articles" v-bind:key="article.id">
             <h1 class="text-3xl font-bold">{{article.title.toUpperCase()}}</h1>
             <p class="text-xl">{{article.description}}</p>
+            <button class="text-indigo-700 hover:bg-indigo-700 hover:text-white font-bold" @click="editArticle(article.id)">Edit</button>
         </div>
       </div>
     </div>
@@ -35,13 +36,19 @@ export default {
         console.error(err);
       });
   },
-  props: ['articles'],
   name: "Dashboard",
   data() {
     return {
-      articles: ""
+      articles: []
     };
   },
-  methods: {}
+  methods: {
+    editArticle(articleId) {
+      alert(articleId)
+    },
+    creator() {
+      this.$router.push({ path: "/creator" })
+    }
+  }
 };
 </script>
